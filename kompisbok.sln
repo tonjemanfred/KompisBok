@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.810.17
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kompisbok", "kompisbok\kompisbok.csproj", "{C51738FC-8CBC-451C-97FE-D0515044ECE5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|anycpu = Debug|anycpu
+		Release|anycpu = Release|anycpu
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C51738FC-8CBC-451C-97FE-D0515044ECE5}.Debug|anycpu.ActiveCfg = Debug|anycpu
+		{C51738FC-8CBC-451C-97FE-D0515044ECE5}.Debug|anycpu.Build.0 = Debug|anycpu
+		{C51738FC-8CBC-451C-97FE-D0515044ECE5}.Release|anycpu.ActiveCfg = Release|anycpu
+		{C51738FC-8CBC-451C-97FE-D0515044ECE5}.Release|anycpu.Build.0 = Release|anycpu
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9326F5F0-C401-458F-A91E-F0D525DD951C}
+	EndGlobalSection
+EndGlobal

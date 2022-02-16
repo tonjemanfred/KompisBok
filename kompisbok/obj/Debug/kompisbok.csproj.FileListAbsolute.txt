@@ -1,0 +1,10 @@
+/Users/tonjemanfred/Projects/kompisbok/kompisbok/obj/Debug/kompisbok.csproj.AssemblyReference.cache
+/Users/tonjemanfred/Projects/kompisbok/kompisbok/obj/Debug/kompisbok.csproj.CoreCompileInputs.cache
+/Users/tonjemanfred/Projects/kompisbok/kompisbok/bin/Debug/kompisbok.exe
+/Users/tonjemanfred/Projects/kompisbok/kompisbok/bin/Debug/kompisbok.pdb
+/Users/tonjemanfred/Projects/kompisbok/kompisbok/obj/Debug/kompisbok.exe
+/Users/tonjemanfred/Projects/kompisbok/kompisbok/obj/Debug/kompisbok.pdb
+/Users/tonjemanfred/Documents/VS - Projects/kompisbok/kompisbok/obj/Debug/kompisbok.csproj.AssemblyReference.cache
+/Users/tonjemanfred/Documents/VS - Projects/kompisbok/kompisbok/obj/Debug/kompisbok.csproj.CoreCompileInputs.cache
+/Users/tonjemanfred/Documents/VS - Projects/kompisbok/kompisbok/obj/Debug/kompisbok.exe
+/Users/tonjemanfred/Documents/VS - Projects/kompisbok/kompisbok/obj/Debug/kompisbok.pdb
