@@ -10,6 +10,7 @@ namespace Kompisbok
         {
             Console.WriteLine("-----------------------------------");
             Console.WriteLine("\nHej kompis!!");
+            Console.WriteLine("test");
             /*Console.WriteLine("Vad vill du/ni hitta på idag?");
             Console.WriteLine("\n-----------------------------------");
             Console.Write("\n1 - Visa kompislista");
