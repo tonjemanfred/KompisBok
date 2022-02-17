@@ -8,3 +8,5 @@
 /Users/tonjemanfred/Documents/VS - Projects/kompisbok/kompisbok/obj/Debug/kompisbok.csproj.CoreCompileInputs.cache
 /Users/tonjemanfred/Documents/VS - Projects/kompisbok/kompisbok/obj/Debug/kompisbok.exe
 /Users/tonjemanfred/Documents/VS - Projects/kompisbok/kompisbok/obj/Debug/kompisbok.pdb
+/Users/tonjemanfred/Documents/VS - Projects/KompisBok/kompisbok/bin/Debug/kompisbok.exe
+/Users/tonjemanfred/Documents/VS - Projects/KompisBok/kompisbok/bin/Debug/kompisbok.pdb

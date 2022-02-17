@@ -10,8 +10,7 @@ namespace Kompisbok
         {
             Console.WriteLine("-----------------------------------");
             Console.WriteLine("\nHej kompis!!");
-            Console.WriteLine("test");
-            /*Console.WriteLine("Vad vill du/ni hitta på idag?");
+            Console.WriteLine("Vad vill du/ni hitta på idag?");
             Console.WriteLine("\n-----------------------------------");
             Console.Write("\n1 - Visa kompislista");
             Console.Write("\n2 - Lägg till kompis");
@@ -21,27 +20,27 @@ namespace Kompisbok
             Console.Write("\nVälj menyval genom att skriva in rätt siffra: ");
             int menyval = int.Parse(Console.ReadLine());
 
-            if (menyval == 1)
+            /*if (menyval == 1)
             {
                 SkrivUtKompisRegister();
-            }
+            }*/
             if (menyval == 2)
             {
-                LäggTillKompis();
+                do
+                {
+                    LäggTillKompis();
+                    Console.Write("\nVill du lägga till en kompis till?? (j/n): ");
+                } while (Console.ReadLine() != "n");
+                SkrivUtKompisRegister();
+                Console.Write("\n\nHejdå kompis!! :D");
+                Console.ReadLine();
             }
-            if (menyval == 4)
+            /*if (menyval == 4)
             {
                 Console.Write("Hejdå kompis!! :D");
             }*/
 
-            do
-            {
-                LäggTillKompis();
-                Console.Write("\nVill du lägga till en kompis till?? (j/n): ");
-            } while (Console.ReadLine() != "n");
-            SkrivUtKompisRegister();
-            Console.Write("\n\nHejdå kompis!! :D");
-            Console.ReadLine();
+
         }
 
         //metod för menyval 1 där kompislistan kommer att skrivas ut i konsolen
@@ -59,19 +58,32 @@ namespace Kompisbok
         static void LäggTillKompis()
         {
             Kompis ny = new Kompis(); //skapa ett objekt, i temporära variabeln "ny"
+            Console.WriteLine("Kul med en ny kompis! Låt oss lägga till henne/honom!");
             Console.Write("\nNya kompisen namn: ");
             ny.namn = Console.ReadLine();
-            Console.Write("Nya kompisens födelsedag (skriv såhär 01 jan 99): ");
+            Console.Write("Nya kompisens födelsedag (skriv såhär 01 jan 1999): ");
             ny.fodelsedatum = Console.ReadLine();
-            Console.Write("Nya kompisens telefonnummer: ");
-            ny.telefonnummer = int.Parse(Console.ReadLine());
+            Console.Write("Nya kompisens telefonnummer (skriv såhär 0712345678: ");
+            while (true)
+            {
+                try
+                {
+                    ny.telefonnummer = int.Parse(Console.ReadLine());
+                    break;
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine("\n" + e + "\n\n");
+                    Console.WriteLine("Du matade inte in telefonnummret korrekt. \nSe till att du skriv såhär: 0712345678");
+                }
+            }
             Console.Write("Nya kompisens favvofärg: ");
             ny.farg = Console.ReadLine();
 
-            kompisregister = UtokaVektor(kompisregister, ny);
+            kompisregister = UtokaVektor(kompisregister, ny); //anropar metoden för att utöka vektorn
         }
 
-
+        //metod för att utöka vektorn
         public static Kompis[] UtokaVektor(Kompis[] vektor, Kompis nytt)
         {
             Kompis[] nyVektor = new Kompis[vektor.Length + 1];
@@ -140,19 +152,6 @@ namespace Kompisbok
             //Skriver ut kompislistan med alla attribut
             Console.WriteLine(
                 kompisLista.namn + "\t\t" + kompisLista.fodelsedatum + "\t" + kompisLista.telefonnummer + "\t" + kompisLista.farg); 
-        }
-        //METOD FÖR ATT LÄGGA TILL KOMPIS
-        public Kompis LaggTillKompis()
-        {
-            Console.Write("Fler kompisar! Vad roligt!!");
-            Console.Write("\nSkriv ditt namn: ");
-            string namn = (Console.ReadLine());
-            Console.Write("\nSkriv din födelsedag: ");
-            DateTime fodelsedag = Console.ReadLine(); //kolla på detta hur man ska göra inmatning av DateTime så att det inte automatiskt genereras
-            Console.Write("\nSkriv ditt telefonnummer: ");
-            int telefonnummer = int.Parse(Console.ReadLine());
-            Console.Write("\nSkriv din favoritfärg: ");
-            string farg = Console.ReadLine();
         }*/
     }
 }
