@@ -67,7 +67,7 @@ namespace Kompisbok
             ny.namn = Console.ReadLine();
             Console.Write("Nya kompisens födelsedag (skriv såhär: ååmmdd): "); //kan man lägga till en == av något slag som hantering av fel inmatning?
             ny.fodelsedatum = MataInInt();
-            Console.Write("Nya kompisens telefonnummer (skriv såhär 0712345678: ");
+            Console.Write("Nya kompisens telefonnummer (skriv såhär: 0712345678: ");
             ny.telefonnummer = MataInInt();
             Console.Write("Nya kompisens favvofärg: ");
             ny.farg = Console.ReadLine();
@@ -89,7 +89,7 @@ namespace Kompisbok
             int check;
             while (!int.TryParse(Console.ReadLine(), out check))//Medan inmatat inte är heltal skriv ut felmedelande och fråga igen.
             {
-                Console.WriteLine("Du har skrivt ett fel input försök igen.");
+                Console.Write("Du har skrivt ett fel input försök igen: ");
             } return check;
         }
 
