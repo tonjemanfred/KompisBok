@@ -8,9 +8,16 @@ namespace Kompisbok
 
         public static void Main(string[] args)
         {
+
+            Meny();
+        }
+
+        public static void Meny()
+
+        {
             Console.WriteLine("-----------------------------------");
             Console.WriteLine("\nHej kompis!!");
-            Console.WriteLine("Vad vill du/ni hitta på idag?");
+            Console.WriteLine("Vad vill du/ni hitta på?");
             Console.WriteLine("\n-----------------------------------");
             Console.Write("\n1 - Visa kompislista");
             Console.Write("\n2 - Lägg till kompis");
@@ -20,10 +27,10 @@ namespace Kompisbok
             Console.Write("\nVälj menyval genom att skriva in rätt siffra: ");
             int menyval = int.Parse(Console.ReadLine());
 
-            /*if (menyval == 1)
+            if (menyval == 1)
             {
                 SkrivUtKompisRegister();
-            }*/
+            }
             if (menyval == 2)
             {
                 do
@@ -31,16 +38,13 @@ namespace Kompisbok
                     LäggTillKompis();
                     Console.Write("\nVill du lägga till en kompis till?? (j/n): ");
                 } while (Console.ReadLine() != "n");
-                SkrivUtKompisRegister();
-                Console.Write("\n\nHejdå kompis!! :D");
-                Console.ReadLine();
+                Meny(); 
+                
             }
-            /*if (menyval == 4)
+            if (menyval == 4)
             {
                 Console.Write("Hejdå kompis!! :D");
-            }*/
-
-
+            }
         }
 
         //metod för menyval 1 där kompislistan kommer att skrivas ut i konsolen
@@ -50,7 +54,7 @@ namespace Kompisbok
             Console.WriteLine("NAMN \t\t FÖDELSEDAG \t TELEFONNUMMER \t FAVVOFÄRG");
             for (int i = 0; i < kompisregister.Length; i++) //i en loop kommer varje kompis att skrivas ut i konsolen kompis för kompis
             {
-                Console.WriteLine(kompisregister[i].namn + "\t\t" + kompisregister[i].fodelsedatum + "\t" + kompisregister[i].telefonnummer + "\t" + kompisregister[i].farg);
+                Console.WriteLine(kompisregister[i].namn + "\t\t" + kompisregister[i].fodelsedatum + "\t\t" + kompisregister[i].telefonnummer + "\t" + kompisregister[i].farg);
             }
         }
 
@@ -61,22 +65,10 @@ namespace Kompisbok
             Console.WriteLine("Kul med en ny kompis! Låt oss lägga till henne/honom!");
             Console.Write("\nNya kompisen namn: ");
             ny.namn = Console.ReadLine();
-            Console.Write("Nya kompisens födelsedag (skriv såhär 01 jan 1999): ");
-            ny.fodelsedatum = Console.ReadLine();
+            Console.Write("Nya kompisens födelsedag (skriv såhär: ååmmdd): "); //kan man lägga till en == av något slag som hantering av fel inmatning?
+            ny.fodelsedatum = MataInInt();
             Console.Write("Nya kompisens telefonnummer (skriv såhär 0712345678: ");
-            while (true)
-            {
-                try
-                {
-                    ny.telefonnummer = int.Parse(Console.ReadLine());
-                    break;
-                }
-                catch (FormatException e)
-                {
-                    Console.WriteLine("\n" + e + "\n\n");
-                    Console.WriteLine("Du matade inte in telefonnummret korrekt. \nSe till att du skriv såhär: 0712345678");
-                }
-            }
+            ny.telefonnummer = MataInInt();
             Console.Write("Nya kompisens favvofärg: ");
             ny.farg = Console.ReadLine();
 
@@ -91,6 +83,14 @@ namespace Kompisbok
                 nyVektor[i] = vektor[i];
             nyVektor[vektor.Length] = nytt;
             return nyVektor;
+        }
+        public static int MataInInt()
+        {
+            int check;
+            while (!int.TryParse(Console.ReadLine(), out check))//Medan inmatat inte är heltal skriv ut felmedelande och fråga igen.
+            {
+                Console.WriteLine("Du har skrivt ett fel input försök igen.");
+            } return check;
         }
 
         /* //denna ska vi använda sedan för ta bort objekt från vektorn
