@@ -8,12 +8,12 @@ namespace Kompisbok
 
         public static void Main(string[] args)
         {
-
+            //ToDO LaddaSparadTextfil();
             Meny();
+            //ToDO SparaTillTextfil();
         }
 
         public static void Meny()
-
         {
             Console.WriteLine("-----------------------------------");
             Console.WriteLine("\nHej kompis!!");
@@ -21,17 +21,20 @@ namespace Kompisbok
             Console.WriteLine("\n-----------------------------------");
             Console.Write("\n1 - Visa kompislista");
             Console.Write("\n2 - Lägg till kompis");
-            Console.Write("\n3 - Redigera eller ta bort kompis");
+            Console.Write("\n3 - Redigera eller ta bort kompis"); //ToDo metod för att ta bort kompis. Redigera är inte ett krav för godkänt
             Console.Write("\n4 - Stäng kompisboken\n");
             Console.WriteLine("\n-----------------------------------");
             Console.Write("\nVälj menyval genom att skriva in rätt siffra: ");
             int menyval = int.Parse(Console.ReadLine());
+            //ToDO if-meny eller switch-case??
+
+
 
             if (menyval == 1)
             {
                 SkrivUtKompisRegister();
             }
-            if (menyval == 2)
+            else if (menyval == 2)
             {
                 do
                 {
@@ -39,12 +42,17 @@ namespace Kompisbok
                     Console.Write("\nVill du lägga till en kompis till?? (j/n): ");
                 } while (Console.ReadLine() != "n");
                 Meny(); 
-                
             }
-            if (menyval == 4)
+            //ToDO menyval == 3 ta bort en kompis
+            else if (menyval == 4)
             {
                 Console.Write("Hejdå kompis!! :D");
             }
+            else
+            {
+                Console.Write("Ojdå, du verkar ha skrivit in fel! Vi försöker igen :)");
+            }
+            //ToDO ifall användaren skriver in felaktigt menyval --> tillbaka till menyn
         }
 
         //metod för menyval 1 där kompislistan kommer att skrivas ut i konsolen
@@ -57,9 +65,9 @@ namespace Kompisbok
                 Console.WriteLine(kompisregister[i].namn + "\t\t" + kompisregister[i].fodelsedatum + "\t\t" + kompisregister[i].telefonnummer + "\t" + kompisregister[i].farg);
             }
         }
-
+        
         //menyval 2 där man lägger till kompisar i boken
-        static void LäggTillKompis()
+        public static void LäggTillKompis()
         {
             Kompis ny = new Kompis(); //skapa ett objekt, i temporära variabeln "ny"
             Console.WriteLine("Kul med en ny kompis! Låt oss lägga till henne/honom!");
@@ -67,12 +75,22 @@ namespace Kompisbok
             ny.namn = Console.ReadLine();
             Console.Write("Nya kompisens födelsedag (skriv såhär: ååmmdd): "); //kan man lägga till en == av något slag som hantering av fel inmatning?
             ny.fodelsedatum = MataInInt();
-            Console.Write("Nya kompisens telefonnummer (skriv såhär: 0712345678: ");
+            Console.Write("Nya kompisens telefonnummer (skriv såhär: 46712345678: "); //influderar riktnummer för att annars går vi miste om den första 0:an i utskriften
             ny.telefonnummer = MataInInt();
             Console.Write("Nya kompisens favvofärg: ");
             ny.farg = Console.ReadLine();
 
             kompisregister = UtokaVektor(kompisregister, ny); //anropar metoden för att utöka vektorn
+        }
+
+        public static int MataInInt() //metod för hantering av fel inmatning vid int-typ
+        {
+            int check;
+            while (!int.TryParse(Console.ReadLine(), out check))//Medan inmatat inte är heltal skriv ut felmedelande och fråga igen.
+            {
+                Console.Write("Hmm, du verkar ha skrivt fel input. Försök igen: ");
+            }
+            return check;
         }
 
         //metod för att utöka vektorn
@@ -84,17 +102,9 @@ namespace Kompisbok
             nyVektor[vektor.Length] = nytt;
             return nyVektor;
         }
-        public static int MataInInt()
-        {
-            int check;
-            while (!int.TryParse(Console.ReadLine(), out check))//Medan inmatat inte är heltal skriv ut felmedelande och fråga igen.
-            {
-                Console.Write("Du har skrivt ett fel input försök igen: ");
-            } return check;
-        }
 
-        /* //denna ska vi använda sedan för ta bort objekt från vektorn
-        static Kompis[] DecreaseArray(Kompis[] vektor)
+        //denna ska vi använda sedan för ta bort objekt från vektorn
+        public static Kompis[] DecreaseArray(Kompis[] vektor)
         {
             Kompis[] nyVektor = new Kompis[vektor.Length - 1];
             for (int i = 0; i < vektor.Length - 1; i++)
@@ -102,26 +112,32 @@ namespace Kompisbok
                 nyVektor[i] = vektor[i];
             }
             return nyVektor;
-        }*/
+        }
 
+        //ToDO metod för att lägga till gamla och nya kompisar i vektorn (sparar objekten (kompisarna) i vektorn)
+        public static Kompis[] LäggTillKompisTillVektor(Kompis[] gamlaKompisRegister, Kompis nyKompis)
+        {
+            Kompis[] nyKompisRegister = new Kompis[gamlaKompisRegister.Length + 1];
+            for (int i = 0; i < gamlaKompisRegister.Length; i++)
+            {
+                nyKompisRegister[i] = gamlaKompisRegister[i];
+            }
+            nyKompisRegister[gamlaKompisRegister.Length] = nyKompis;
+            return nyKompisRegister;
+        }
 
+        //ToDO skapa en metod så att det skriver ut i ett textdokument
+        public static void KompisStream()
+        {
+
+        }
 
 
         /* DETTA ÄR ETT FÖRSLAG PÅ MENY-METOD
         public static void Meny()
         {
-            Console.Write("-----------------------------------");
-            Console.Write("\nHej kompis!!");
-            Console.Write("\nVad vill du/ni hitta på idag?");
-            Console.Write("\n-----------------------------------");
-            Console.Write("\n1 - Visa kompislista");
-            Console.Write("\n2 - Lägg till kompis");
-            Console.Write("\n3 - Redigera eller ta bort kompis");
-            Console.Write("\n4 - Stäng kompisboken");
-            Console.Write("\n-----------------------------------");
-            Console.Write("\nVälj menyval genom att skriva in rätt siffra \n");
 
-            /*while (true)
+            /*while (!avsluta)
             {
                 int menyval;
                 Console.Write("\nVälj menyval: ");
@@ -139,19 +155,13 @@ namespace Kompisbok
                             RedigeraKompis();
                         case 4:
                             Console.Write("Hejdå kompis!");
+                            avsluta = true;
                             break;
-                            //default:
+                       //default:
                     }
                 }
             }
-        }
-        //metod för att visa KompisLista
-        public Kompis KompisLista(string namn, DateTime fodelsedatum, int telefonnummer, string farg)
-        {
-            //kompisbok är självaste boken som visar listan med kompisarna
-            //Skriver ut kompislistan med alla attribut
-            Console.WriteLine(
-                kompisLista.namn + "\t\t" + kompisLista.fodelsedatum + "\t" + kompisLista.telefonnummer + "\t" + kompisLista.farg); 
         }*/
+
     }
 }
