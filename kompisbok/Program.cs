@@ -13,6 +13,9 @@ namespace Kompisbok
             //ToDO SparaTillTextfil();
         }
 
+        /// <summary>
+        /// metod för programmets meny
+        /// </summary>
         public static void Meny()
         {
             Console.WriteLine("-----------------------------------");
@@ -55,7 +58,9 @@ namespace Kompisbok
             //ToDO ifall användaren skriver in felaktigt menyval --> tillbaka till menyn
         }
 
-        //metod för menyval 1 där kompislistan kommer att skrivas ut i konsolen
+        /// <summary>
+        /// metod där kompislistan kommer att skrivas ut i konsolen. menyval 1
+        /// </summary>
         static void SkrivUtKompisRegister()
         {
             Console.WriteLine("\n\nHär är dina kompisar: ");
@@ -65,8 +70,10 @@ namespace Kompisbok
                 Console.WriteLine(kompisregister[i].namn + "\t\t" + kompisregister[i].fodelsedatum + "\t\t" + kompisregister[i].telefonnummer + "\t" + kompisregister[i].farg);
             }
         }
-        
-        //menyval 2 där man lägger till kompisar i boken
+
+        /// <summary>
+        /// metod för att lägga till en kompis i boken. menyval 2
+        /// </summary>
         public static void LäggTillKompis()
         {
             Kompis ny = new Kompis(); //skapa ett objekt, i temporära variabeln "ny"
@@ -83,7 +90,11 @@ namespace Kompisbok
             kompisregister = UtokaVektor(kompisregister, ny); //anropar metoden för att utöka vektorn
         }
 
-        public static int MataInInt() //metod för hantering av fel inmatning vid int-typ
+        /// <summary>
+        /// metod för hantering av fel inmatning vid int-typ
+        /// </summary>
+        /// <returns></returns>
+        public static int MataInInt() 
         {
             int check;
             while (!int.TryParse(Console.ReadLine(), out check))//Medan inmatat inte är heltal skriv ut felmedelande och fråga igen.
@@ -93,7 +104,12 @@ namespace Kompisbok
             return check;
         }
 
-        //metod för att utöka vektorn
+        /// <summary>
+        /// metod för att utöka vektorn
+        /// </summary>
+        /// <param name="vektor"></param>
+        /// <param name="nytt"></param>
+        /// <returns></returns>
         public static Kompis[] UtokaVektor(Kompis[] vektor, Kompis nytt)
         {
             Kompis[] nyVektor = new Kompis[vektor.Length + 1];
@@ -103,7 +119,11 @@ namespace Kompisbok
             return nyVektor;
         }
 
-        //denna ska vi använda sedan för ta bort objekt från vektorn
+        /// <summary>
+        /// denna metod ska vi använda sedan för ta bort objekt från vektorn
+        /// </summary>
+        /// <param name="vektor"></param>
+        /// <returns></returns>
         public static Kompis[] DecreaseArray(Kompis[] vektor)
         {
             Kompis[] nyVektor = new Kompis[vektor.Length - 1];
@@ -115,6 +135,12 @@ namespace Kompisbok
         }
 
         //ToDO metod för att lägga till gamla och nya kompisar i vektorn (sparar objekten (kompisarna) i vektorn)
+        /// <summary>
+        /// metod för att lägga till gamla och nya kompisar i vektorn
+        /// </summary>
+        /// <param name="gamlaKompisRegister"></param>
+        /// <param name="nyKompis"></param>
+        /// <returns></returns>
         public static Kompis[] LäggTillKompisTillVektor(Kompis[] gamlaKompisRegister, Kompis nyKompis)
         {
             Kompis[] nyKompisRegister = new Kompis[gamlaKompisRegister.Length + 1];
@@ -127,6 +153,9 @@ namespace Kompisbok
         }
 
         //ToDO skapa en metod så att det skriver ut i ett textdokument
+        /// <summary>
+        /// metod som skriver ut boken i ett textdokument
+        /// </summary>
         public static void KompisStream()
         {
 
