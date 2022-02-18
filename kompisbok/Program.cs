@@ -46,7 +46,9 @@ namespace Kompisbok
                 } while (Console.ReadLine() != "n");
                 Meny(); 
             }
+
             //ToDO menyval == 3 ta bort en kompis
+
             else if (menyval == 4)
             {
                 Console.Write("Hejdå kompis!! :D");
@@ -63,6 +65,7 @@ namespace Kompisbok
         /// </summary>
         static void SkrivUtKompisRegister()
         {
+            //ToDO lägga till så att registret sorteras enligt nån viss ordning, tex namn
             Console.WriteLine("\n\nHär är dina kompisar: ");
             Console.WriteLine("NAMN \t\t FÖDELSEDAG \t TELEFONNUMMER \t FAVVOFÄRG");
             for (int i = 0; i < kompisregister.Length; i++) //i en loop kommer varje kompis att skrivas ut i konsolen kompis för kompis
