@@ -65,13 +65,15 @@ namespace Kompisbok
         /// </summary>
         static void SkrivUtKompisRegister()
         {
-            //ToDO lägga till så att registret sorteras enligt nån viss ordning, tex namn
+            SorteraEfterNamn(); 
+
             Console.WriteLine("\n\nHär är dina kompisar: ");
             Console.WriteLine("NAMN \t\t FÖDELSEDAG \t TELEFONNUMMER \t FAVVOFÄRG");
             for (int i = 0; i < kompisregister.Length; i++) //i en loop kommer varje kompis att skrivas ut i konsolen kompis för kompis
             {
                 Console.WriteLine(kompisregister[i].namn + "\t\t" + kompisregister[i].fodelsedatum + "\t\t" + kompisregister[i].telefonnummer + "\t" + kompisregister[i].farg);
             }
+            Meny();
         }
 
         /// <summary>
@@ -85,7 +87,7 @@ namespace Kompisbok
             ny.namn = Console.ReadLine();
             Console.Write("Nya kompisens födelsedag (skriv såhär: ååmmdd): "); //kan man lägga till en == av något slag som hantering av fel inmatning?
             ny.fodelsedatum = MataInInt();
-            Console.Write("Nya kompisens telefonnummer (skriv såhär: 46712345678: "); //influderar riktnummer för att annars går vi miste om den första 0:an i utskriften
+            Console.Write("Nya kompisens telefonnummer (skriv såhär: 46712345678: "); //inkluderar riktnummer för att annars går vi miste om den första 0:an i utskriften
             ny.telefonnummer = MataInInt();
             Console.Write("Nya kompisens favvofärg: ");
             ny.farg = Console.ReadLine();
@@ -162,6 +164,42 @@ namespace Kompisbok
         public static void KompisStream()
         {
 
+        }
+
+        /// <summary>
+        /// metod som sorterar kompisregistret efter namn
+        /// </summary>
+        public static void SorteraEfterNamn()
+        {
+            for (int i = 0; i < kompisregister.Length; i++)
+            {
+                int minst = i;
+
+                for (int j = i + 1; j < kompisregister.Length; j++)
+                {
+                    if (kompisregister[minst].namn.CompareTo(kompisregister[j].namn) > 0)
+                    {
+                        minst = j;
+                    }
+                }
+                if (i < minst)
+                {
+                    Swap(kompisregister, minst, i);
+                }
+            }
+        }
+
+        /// <summary>
+        /// metod som stöttar metoden SorteraEfterNamn och byter plats på två objekt i vektorn
+        /// </summary>
+        /// <param name="vektor"></param>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        public static void Swap(Kompis[] vektor, int a, int b)
+        {
+            Kompis tilf = vektor[a];
+            vektor[a] = vektor[b];
+            vektor[b] = tilf;
         }
 
 
