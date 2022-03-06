@@ -1,0 +1,4 @@
+Anette	3	3	h	
+Emil	2	3	4	
+Nadja	3	5	t	
+Tonje	90	90	r	

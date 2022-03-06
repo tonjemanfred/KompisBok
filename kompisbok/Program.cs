@@ -9,7 +9,9 @@ namespace Kompisbok
 
         public static void Main(string[] args)
         {
-
+            Console.WriteLine("-----------------------------------");
+            Console.WriteLine("\nHej kompis!!");
+            Console.WriteLine("Vad vill du/ni hitta på?");
             Meny();
             //ToDO SparaTillTextfil();
         }
@@ -19,27 +21,21 @@ namespace Kompisbok
         /// </summary>
         public static void Meny()
         {
-
-
-            Console.WriteLine("-----------------------------------");
-            Console.WriteLine("\nHej kompis!!");
-            Console.WriteLine("Vad vill du/ni hitta på?");
             Console.WriteLine("\n-----------------------------------");
-            Console.Write("\n1 - Visa kompislista");
+            Console.Write("1 - Visa kompislista");
             Console.Write("\n2 - Lägg till kompis");
-            Console.Write("\n3 - Redigera eller ta bort kompis"); //ToDo metod för att ta bort kompis. Redigera är inte ett krav för godkänt
+            Console.Write("\n3 - Ta bort kompis"); //ToDo metod för att ta bort kompis. Redigera är inte ett krav för godkänt
             Console.Write("\n4 - Spara och stäng kompisboken\n");
-            Console.WriteLine("\n-----------------------------------");
+            Console.WriteLine("-----------------------------------");
             Console.Write("\nVälj menyval genom att skriva in rätt siffra: ");
             int menyval = int.Parse(Console.ReadLine());
             //ToDO if-meny eller switch-case??
-
-
 
             if (menyval == 1)
             {
                 //LaddaSparadTextFil();
                 SkrivUtKompisRegister();
+                Meny();
             }
             else if (menyval == 2)
             {
@@ -47,24 +43,19 @@ namespace Kompisbok
                 {
                     LäggTillKompis();
                     Console.Write("\nVill du lägga till en kompis till?? (j/n): ");
-                } while (Console.ReadLine() != "n");
+                } while (Console.ReadLine().ToLower() != "n");
                 Meny();
             }
-
             //ToDO menyval == 3 ta bort en kompis
             else if (menyval == 3)
             {
-                Console.WriteLine("Skriv namned på kompisen du vill hitta: ");
-                string searchPhrase = Console.ReadLine();
-                SearchBooksViaTitle(searchPhrase);
+                SokningViaNamn();
+                Meny();
             }
             else if (menyval == 4)
             {
-                Console.Write("Hejdå kompis!! :D");
-            }
-            else if (menyval == 5)
-            {
                 SparaTillTextfil();
+                Console.Write("\n\nHejdå kompis!! :D");
             }
             else
             {
@@ -84,7 +75,6 @@ namespace Kompisbok
             {
                 Console.WriteLine(kompisregister[i].namn + "\t\t" + kompisregister[i].fodelsedatum + "\t\t" + kompisregister[i].telefonnummer + "\t" + kompisregister[i].farg);
             }
-            Meny();
         }
 
         /// <summary>
@@ -93,7 +83,7 @@ namespace Kompisbok
         public static void LäggTillKompis()
         {
             Kompis ny = new Kompis(); //skapa ett objekt, i temporära variabeln "ny"
-            Console.WriteLine("Kul med en ny kompis! Låt oss lägga till henne/honom!");
+            Console.WriteLine("\nKul med en ny kompis! Låt oss lägga till henne/honom!");
             Console.Write("\nNya kompisen namn: ");
             ny.namn = Console.ReadLine();
             Console.Write("Nya kompisens födelsedag (skriv såhär: ååmmdd): "); //kan man lägga till en == av något slag som hantering av fel inmatning?
@@ -174,14 +164,6 @@ namespace Kompisbok
         }
 
         /// <summary>
-        /// metod som skriver ut boken i ett textdokument
-        /// </summary>
-        public static void KompisStream()
-        {
-
-        }
-
-        /// <summary>
         /// metod som sorterar kompisregistret efter namn
         /// </summary>
         public static void SorteraEfterNamn()
@@ -204,39 +186,6 @@ namespace Kompisbok
             }
         }
 
-        public static void SokningEfterNamn()
-        {
-
-        }
-        public static Kompis[] SearchBooksViaTitle(string searchPhrase)
-        {
-            // Först skapar vi en tom vektor 
-            Kompis[] hittadKompis = new Kompis[0];
-
-            // Sedan itererar vi igenom listan
-            for (int i = 0; i < kompisregister.Length; i++)
-            {
-                // Om titeln stämmer med sökordet, lägger vi den boken
-                // i nästa lediga plats i den nya vektorn
-                if (kompisregister[i].namn.ToUpper().Contains(searchPhrase.ToUpper()))
-                {
-                    hittadKompis = AddBook(hittadKompis, kompisregister[i]);
-                }
-            }
-            Console.WriteLine($"Hittad: {hittadKompis}");
-            return hittadKompis;
-        }
-        public static Kompis[] AddBook(Kompis[] bookList, Kompis k)
-        {
-            Kompis[] temp = new Kompis[kompisregister.Length + 1];
-            for (int i = 0; i < kompisregister.Length; i++)
-            {
-                temp[i] = kompisregister[i];
-            }
-            temp[kompisregister.Length] = k;
-            return temp;
-        }
-
         /// <summary>
         /// metod som stöttar metoden SorteraEfterNamn och byter plats på två objekt i vektorn
         /// </summary>
@@ -248,6 +197,25 @@ namespace Kompisbok
             Kompis tilf = vektor[a]; //tilf=tillfällig
             vektor[a] = vektor[b];
             vektor[b] = tilf;
+        }
+
+        /// <summary>
+        /// Söker efter kompis och raderar sedan från vektorn
+        /// </summary>
+        public static void SokningViaNamn()
+        {
+            int i = 0;
+            Console.Write("Sök efter personen: ");
+            string sokning = Console.ReadLine();
+            while (kompisregister[i].namn.ToUpper().CompareTo(sokning.ToUpper()) != 0)
+            {
+                Console.WriteLine("Hittade inte. Försök igen!");
+                Console.Write("Sök efter personen: ");
+                sokning = Console.ReadLine();
+            }
+            Console.WriteLine("Hittat personen!");
+            TaBortElement(i);
+            Console.WriteLine("Personen är nu borttagen från boken.\n\n");
         }
 
         //ToDO skapa en metod så att det skriver ut i ett textdokument
