@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Kompisbok
 {
@@ -8,7 +9,7 @@ namespace Kompisbok
 
         public static void Main(string[] args)
         {
-            //ToDO LaddaSparadTextfil();
+
             Meny();
             //ToDO SparaTillTextfil();
         }
@@ -18,6 +19,8 @@ namespace Kompisbok
         /// </summary>
         public static void Meny()
         {
+
+
             Console.WriteLine("-----------------------------------");
             Console.WriteLine("\nHej kompis!!");
             Console.WriteLine("Vad vill du/ni hitta på?");
@@ -25,7 +28,7 @@ namespace Kompisbok
             Console.Write("\n1 - Visa kompislista");
             Console.Write("\n2 - Lägg till kompis");
             Console.Write("\n3 - Redigera eller ta bort kompis"); //ToDo metod för att ta bort kompis. Redigera är inte ett krav för godkänt
-            Console.Write("\n4 - Stäng kompisboken\n");
+            Console.Write("\n4 - Spara och stäng kompisboken\n");
             Console.WriteLine("\n-----------------------------------");
             Console.Write("\nVälj menyval genom att skriva in rätt siffra: ");
             int menyval = int.Parse(Console.ReadLine());
@@ -35,6 +38,7 @@ namespace Kompisbok
 
             if (menyval == 1)
             {
+                //LaddaSparadTextFil();
                 SkrivUtKompisRegister();
             }
             else if (menyval == 2)
@@ -44,14 +48,23 @@ namespace Kompisbok
                     LäggTillKompis();
                     Console.Write("\nVill du lägga till en kompis till?? (j/n): ");
                 } while (Console.ReadLine() != "n");
-                Meny(); 
+                Meny();
             }
 
             //ToDO menyval == 3 ta bort en kompis
-
+            else if (menyval == 3)
+            {
+                Console.WriteLine("Skriv namned på kompisen du vill hitta: ");
+                string searchPhrase = Console.ReadLine();
+                SearchBooksViaTitle(searchPhrase);
+            }
             else if (menyval == 4)
             {
                 Console.Write("Hejdå kompis!! :D");
+            }
+            else if (menyval == 5)
+            {
+                SparaTillTextfil();
             }
             else
             {
@@ -65,8 +78,6 @@ namespace Kompisbok
         /// </summary>
         static void SkrivUtKompisRegister()
         {
-            SorteraEfterNamn(); 
-
             Console.WriteLine("\n\nHär är dina kompisar: ");
             Console.WriteLine("NAMN \t\t FÖDELSEDAG \t TELEFONNUMMER \t FAVVOFÄRG");
             for (int i = 0; i < kompisregister.Length; i++) //i en loop kommer varje kompis att skrivas ut i konsolen kompis för kompis
@@ -92,17 +103,18 @@ namespace Kompisbok
             Console.Write("Nya kompisens favvofärg: ");
             ny.farg = Console.ReadLine();
 
-            kompisregister = UtokaVektor(kompisregister, ny); //anropar metoden för att utöka vektorn
+            UtokaVektor(ny); //anropar metoden för att utöka vektorn
+            SorteraEfterNamn();
         }
 
         /// <summary>
-        /// metod för hantering av fel inmatning vid int-typ
+        /// felhantering av inmatning vid int-typ
         /// </summary>
         /// <returns></returns>
-        public static int MataInInt() 
+        public static double MataInInt() //ToDO byta namn på metoden till något i stil med FelhanteringDouble??
         {
-            int check;
-            while (!int.TryParse(Console.ReadLine(), out check))//Medan inmatat inte är heltal skriv ut felmedelande och fråga igen.
+            double check;
+            while (!double.TryParse(Console.ReadLine(), out check))//Medan inmatat inte är heltal skriv ut felmedelande och fråga igen.
             {
                 Console.Write("Hmm, du verkar ha skrivt fel input. Försök igen: ");
             }
@@ -115,13 +127,13 @@ namespace Kompisbok
         /// <param name="vektor"></param>
         /// <param name="nytt"></param>
         /// <returns></returns>
-        public static Kompis[] UtokaVektor(Kompis[] vektor, Kompis nytt)
+        public static void UtokaVektor(Kompis nytt)
         {
-            Kompis[] nyVektor = new Kompis[vektor.Length + 1];
-            for (int i = 0; i < vektor.Length; i++)
-                nyVektor[i] = vektor[i];
-            nyVektor[vektor.Length] = nytt;
-            return nyVektor;
+            Kompis[] nyVektor = new Kompis[kompisregister.Length + 1];// Ändra namn på "nyvektor"
+            for (int i = 0; i < kompisregister.Length; i++)
+                nyVektor[i] = kompisregister[i];
+            nyVektor[kompisregister.Length] = nytt;
+            kompisregister = nyVektor;
         }
 
         /// <summary>
@@ -129,14 +141,18 @@ namespace Kompisbok
         /// </summary>
         /// <param name="vektor"></param>
         /// <returns></returns>
-        public static Kompis[] DecreaseArray(Kompis[] vektor)
+        public static void TaBortElement(int index)
         {
-            Kompis[] nyVektor = new Kompis[vektor.Length - 1];
-            for (int i = 0; i < vektor.Length - 1; i++)
+            Kompis[] nyVektor = new Kompis[kompisregister.Length - 1];
+            for (int i = 0; i < index; i++)
             {
-                nyVektor[i] = vektor[i];
+                nyVektor[i] = kompisregister[i];
             }
-            return nyVektor;
+            for (int i = index + 1; i < kompisregister.Length; i++)
+            {
+                nyVektor[i - 1] = kompisregister[i];
+            }
+            kompisregister = nyVektor;
         }
 
         //ToDO metod för att lägga till gamla och nya kompisar i vektorn (sparar objekten (kompisarna) i vektorn)
@@ -157,7 +173,6 @@ namespace Kompisbok
             return nyKompisRegister;
         }
 
-        //ToDO skapa en metod så att det skriver ut i ett textdokument
         /// <summary>
         /// metod som skriver ut boken i ett textdokument
         /// </summary>
@@ -189,6 +204,39 @@ namespace Kompisbok
             }
         }
 
+        public static void SokningEfterNamn()
+        {
+
+        }
+        public static Kompis[] SearchBooksViaTitle(string searchPhrase)
+        {
+            // Först skapar vi en tom vektor 
+            Kompis[] hittadKompis = new Kompis[0];
+
+            // Sedan itererar vi igenom listan
+            for (int i = 0; i < kompisregister.Length; i++)
+            {
+                // Om titeln stämmer med sökordet, lägger vi den boken
+                // i nästa lediga plats i den nya vektorn
+                if (kompisregister[i].namn.ToUpper().Contains(searchPhrase.ToUpper()))
+                {
+                    hittadKompis = AddBook(hittadKompis, kompisregister[i]);
+                }
+            }
+            Console.WriteLine($"Hittad: {hittadKompis}");
+            return hittadKompis;
+        }
+        public static Kompis[] AddBook(Kompis[] bookList, Kompis k)
+        {
+            Kompis[] temp = new Kompis[kompisregister.Length + 1];
+            for (int i = 0; i < kompisregister.Length; i++)
+            {
+                temp[i] = kompisregister[i];
+            }
+            temp[kompisregister.Length] = k;
+            return temp;
+        }
+
         /// <summary>
         /// metod som stöttar metoden SorteraEfterNamn och byter plats på två objekt i vektorn
         /// </summary>
@@ -197,41 +245,44 @@ namespace Kompisbok
         /// <param name="b"></param>
         public static void Swap(Kompis[] vektor, int a, int b)
         {
-            Kompis tilf = vektor[a];
+            Kompis tilf = vektor[a]; //tilf=tillfällig
             vektor[a] = vektor[b];
             vektor[b] = tilf;
         }
 
-
-        /* DETTA ÄR ETT FÖRSLAG PÅ MENY-METOD
-        public static void Meny()
+        //ToDO skapa en metod så att det skriver ut i ett textdokument
+        public static void LaddaSparadTextFil()
         {
-
-            /*while (!avsluta)
+            StreamReader infil = new StreamReader("RegisterLista.txt");
+            string rad;
+            while ((rad = infil.ReadLine()) != null)
             {
-                int menyval;
-                Console.Write("\nVälj menyval: ");
-                while (!int.TryParse(Console.ReadLine(), out menyval))
-                {
-                    Console.Write("\nDet blev något fel i inmatningen.");
+                Kompis ny = new Kompis();
+                string[] attribut = rad.Split('\t');
+                ny.namn = attribut[0];
+                ny.fodelsedatum = int.Parse(attribut[1]);
+                ny.telefonnummer = int.Parse(attribut[2]);
+                ny.farg = attribut[3];
 
-                    switch (menyval)
-                    {
-                        case 1:
-                            KompisLista();
-                        case 2:
-                            LaggTillKompis(); //nadjas
-                        case 3:
-                            RedigeraKompis();
-                        case 4:
-                            Console.Write("Hejdå kompis!");
-                            avsluta = true;
-                            break;
-                       //default:
-                    }
-                }
+                //LäggTillKompis();
+                /*infil.WriteLine("Namn: " + attribut[0]);
+                infil.WriteLine("Födelsedag: " + attribut[1]);
+                infil.WriteLine("Telefonnummer: " + attribut[2]);
+                infil.WriteLine("Färg: " + attribut[3] + "\n");*/
             }
-        }*/
+            infil.Close();
+        }
 
+        public static void SparaTillTextfil()
+        {
+            StreamWriter utfil = new StreamWriter("RegisterLista.txt");
+            for (int i = 0; i < kompisregister.Length; i++)
+            {
+                Kompis k = kompisregister[i];
+                utfil.Write("{0}\t{1}\t{2}\t{3}\t", k.namn, k.fodelsedatum, k.telefonnummer, k.farg);
+                utfil.WriteLine();
+            }
+            utfil.Close();
+        }
     }
 }

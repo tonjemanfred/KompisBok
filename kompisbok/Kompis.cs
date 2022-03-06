@@ -5,8 +5,8 @@ namespace Kompisbok
     public class Kompis
     {
         public string namn; //detta är attributen för kompisen
-        public int fodelsedatum; //tex anv string och visa användaren hur man ska skriva in. 
-        public int telefonnummer;
+        public double fodelsedatum; //tex anv string och visa användaren hur man ska skriva in. 
+        public double telefonnummer;
         public string farg;
     }
 }
