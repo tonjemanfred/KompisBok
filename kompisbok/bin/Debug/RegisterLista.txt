@@ -1,3 +1,2 @@
-Nadja	9	0	l	
-Sannie	2	3	f	
-Tonje	9	9	u	
+Nadja	3	2	t	
+TOnje	4	3	k	

@@ -207,9 +207,22 @@ namespace Kompisbok
             int i = 0;
             Console.Write("Sök efter personen: ");
             string sokning = Console.ReadLine();
+            for (int k = 0; k < kompisregister.Length; k++)
+            {
+                if (kompisregister[i].namn.CompareTo(sokning) == 0)
+                {
+                    Console.WriteLine("Hittat personen!");
+                    TaBortElement(i);
+                    Console.WriteLine("Personen är nu borttagen från boken.\n\n");
+                }
+            }
+
+            /*int i = 0;
+            Console.Write("Sök efter personen: ");
+            string sokning = Console.ReadLine();
             foreach (Kompis k in kompisregister)
             {
-                if(kompisregister[i].namn.ToUpper().CompareTo(sokning.ToUpper()) != 0)
+                for (kompisregister[i].namn.ToUpper().CompareTo(sokning.ToUpper()) != 0)
                 {
                     Console.WriteLine("Hittade inte. Försök igen!");
                     //i++;
@@ -220,7 +233,7 @@ namespace Kompisbok
                 TaBortElement(i);
                 Console.WriteLine("Personen är nu borttagen från boken.\n\n");
                 break;
-            }
+            }*/
 
             /*int i = 0;
             Console.Write("Sök efter personen: ");
