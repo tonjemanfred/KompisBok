@@ -207,15 +207,34 @@ namespace Kompisbok
             int i = 0;
             Console.Write("Sök efter personen: ");
             string sokning = Console.ReadLine();
+            foreach (Kompis k in kompisregister)
+            {
+                if(kompisregister[i].namn.ToUpper().CompareTo(sokning.ToUpper()) != 0)
+                {
+                    Console.WriteLine("Hittade inte. Försök igen!");
+                    //i++;
+                    Console.Write("Sök efter personen: ");
+                    sokning = Console.ReadLine();
+                }
+                Console.WriteLine("Hittat personen!");
+                TaBortElement(i);
+                Console.WriteLine("Personen är nu borttagen från boken.\n\n");
+                break;
+            }
+
+            /*int i = 0;
+            Console.Write("Sök efter personen: ");
+            string sokning = Console.ReadLine();
             while (kompisregister[i].namn.ToUpper().CompareTo(sokning.ToUpper()) != 0)
             {
                 Console.WriteLine("Hittade inte. Försök igen!");
+                //i++;
                 Console.Write("Sök efter personen: ");
                 sokning = Console.ReadLine();
             }
             Console.WriteLine("Hittat personen!");
             TaBortElement(i);
-            Console.WriteLine("Personen är nu borttagen från boken.\n\n");
+            Console.WriteLine("Personen är nu borttagen från boken.\n\n");*/
         }
 
         //ToDO skapa en metod så att det skriver ut i ett textdokument
