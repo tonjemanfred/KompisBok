@@ -9,6 +9,7 @@ namespace Kompisbok
 
         public static void Main(string[] args)
         {
+            LaddaSparadTextFil();
             Console.WriteLine("-----------------------------------");
             Console.WriteLine("\nHej kompis!!");
             Console.WriteLine("Vad vill du/ni hitta på?");
@@ -49,7 +50,10 @@ namespace Kompisbok
             //ToDO menyval == 3 ta bort en kompis
             else if (menyval == 3)
             {
-                SokningViaNamn();
+                int i = 0;
+                Console.Write("Sök efter personen: ");
+                string sokning = Console.ReadLine();
+                //SokningViaNamn(kompisregister, sokning);
                 Meny();
             }
             else if (menyval == 4)
@@ -202,19 +206,21 @@ namespace Kompisbok
         /// <summary>
         /// Söker efter kompis och raderar sedan från vektorn
         /// </summary>
-        public static void SokningViaNamn()
+        /*public static int SokningViaNamn(Kompis[] kompisregister, string p)
         {
             int i = 0;
             Console.Write("Sök efter personen: ");
             string sokning = Console.ReadLine();
             for (int k = 0; k < kompisregister.Length; k++)
             {
-                if (kompisregister[i].namn.CompareTo(sokning) == 0)
+                if (kompisregister[i].namn.ToUpper().CompareTo(sokning.ToUpper()) == 0)
                 {
                     Console.WriteLine("Hittat personen!");
                     TaBortElement(i);
                     Console.WriteLine("Personen är nu borttagen från boken.\n\n");
+                    return i;
                 }
+                return -1;
             }
 
             /*int i = 0;
@@ -247,13 +253,38 @@ namespace Kompisbok
             }
             Console.WriteLine("Hittat personen!");
             TaBortElement(i);
-            Console.WriteLine("Personen är nu borttagen från boken.\n\n");*/
-        }
+            Console.WriteLine("Personen är nu borttagen från boken.\n\n");
+        }*/
 
         //ToDO skapa en metod så att det skriver ut i ett textdokument
+
+
+
+        
         public static void LaddaSparadTextFil()
         {
-            StreamReader infil = new StreamReader("RegisterLista.txt");
+            StreamReader inTextfil = new StreamReader("RegisterLista.txt");
+            if (inTextfil == null)
+            {
+                Console.WriteLine("Kompisboken är tom just nu");
+            }
+            else { }
+            while (true)
+            {
+                string line = inTextfil.ReadLine();
+                if (line == null) break;
+                string[] lines = line.Split('\t');
+
+                Kompis s = new Kompis();
+                s.namn = lines[0];
+                s.fodelsedatum = double.Parse(lines[1]);
+                s.telefonnummer = double.Parse(lines[2]);
+                s.farg = lines[3];
+
+                kompisregister = LäggTillKompisTillVektor(kompisregister, s);
+            }
+
+            /*StreamReader infil = new StreamReader("RegisterLista.txt");
             string rad;
             while ((rad = infil.ReadLine()) != null)
             {
@@ -268,11 +299,14 @@ namespace Kompisbok
                 /*infil.WriteLine("Namn: " + attribut[0]);
                 infil.WriteLine("Födelsedag: " + attribut[1]);
                 infil.WriteLine("Telefonnummer: " + attribut[2]);
-                infil.WriteLine("Färg: " + attribut[3] + "\n");*/
+                infil.WriteLine("Färg: " + attribut[3] + "\n");
             }
-            infil.Close();
+            infil.Close();*/
         }
 
+        /// <summary>
+        /// Skriver vektorns innehåll in i en textfil
+        /// </summary>
         public static void SparaTillTextfil()
         {
             StreamWriter utfil = new StreamWriter("RegisterLista.txt");
@@ -280,7 +314,6 @@ namespace Kompisbok
             {
                 Kompis k = kompisregister[i];
                 utfil.Write("{0}\t{1}\t{2}\t{3}\t", k.namn, k.fodelsedatum, k.telefonnummer, k.farg);
-                utfil.WriteLine();
             }
             utfil.Close();
         }
