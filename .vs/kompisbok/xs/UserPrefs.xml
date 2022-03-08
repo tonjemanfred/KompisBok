@@ -1,8 +1,8 @@
 ﻿<Properties StartupConfiguration="{C51738FC-8CBC-451C-97FE-D0515044ECE5}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="kompisbok/Program.cs">
     <Files>
-      <File FileName="kompisbok/Program.cs" Line="312" Column="1" />
-      <File FileName="kompisbok/Kompis.cs" />
+      <File FileName="kompisbok/Program.cs" Line="114" Column="35" />
+      <File FileName="kompisbok/Kompis.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
