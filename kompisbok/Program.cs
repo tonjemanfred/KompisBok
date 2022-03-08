@@ -156,15 +156,15 @@ namespace Kompisbok
         /// <param name="gamlaKompisRegister"></param>
         /// <param name="nyKompis"></param>
         /// <returns></returns>
-        public static Kompis[] LäggTillKompisTillVektor(Kompis[] gamlaKompisRegister, Kompis nyKompis)
+        public static void LäggTillKompisTillVektor(Kompis nyKompis)
         {
-            Kompis[] nyKompisRegister = new Kompis[gamlaKompisRegister.Length + 1];
-            for (int i = 0; i < gamlaKompisRegister.Length; i++)
+            Kompis[] nyKompisRegister = new Kompis[kompisregister.Length + 1];
+            for (int i = 0; i < kompisregister.Length; i++)
             {
-                nyKompisRegister[i] = gamlaKompisRegister[i];
+                nyKompisRegister[i] = kompisregister[i]; 
             }
-            nyKompisRegister[gamlaKompisRegister.Length] = nyKompis;
-            return nyKompisRegister;
+            nyKompisRegister[kompisregister.Length] = nyKompis;
+            kompisregister = nyKompisRegister;
         }
 
         /// <summary>
@@ -206,23 +206,22 @@ namespace Kompisbok
         /// <summary>
         /// Söker efter kompis och raderar sedan från vektorn
         /// </summary>
-        /*public static int SokningViaNamn(Kompis[] kompisregister, string p)
+        public static int SokningViaNamn(Kompis[] kompisregister, string p)
         {
             int i = 0;
             Console.Write("Sök efter personen: ");
             string sokning = Console.ReadLine();
-            for (int k = 0; k < kompisregister.Length; k++)
+            for (int k = 0; k < kompisregister.Length; k++) //TODo i ist för k
             {
-                if (kompisregister[i].namn.ToUpper().CompareTo(sokning.ToUpper()) == 0)
+                if (kompisregister[i].namn.ToUpper().CompareTo(sokning.ToUpper()) == 0) //ToDO byt variabelnamn på i
                 {
                     Console.WriteLine("Hittat personen!");
                     TaBortElement(i);
                     Console.WriteLine("Personen är nu borttagen från boken.\n\n");
                     return i;
                 }
-                return -1;
             }
-
+            return -1;
             /*int i = 0;
             Console.Write("Sök efter personen: ");
             string sokning = Console.ReadLine();
@@ -253,55 +252,31 @@ namespace Kompisbok
             }
             Console.WriteLine("Hittat personen!");
             TaBortElement(i);
-            Console.WriteLine("Personen är nu borttagen från boken.\n\n");
-        }*/
+            Console.WriteLine("Personen är nu borttagen från boken.\n\n");*/
+        }
 
-        //ToDO skapa en metod så att det skriver ut i ett textdokument
+            //ToDO skapa en metod så att det skriver ut i ett textdokument
 
 
 
-        
-        public static void LaddaSparadTextFil()
+
+            public static void LaddaSparadTextFil()
         {
-            StreamReader inTextfil = new StreamReader("RegisterLista.txt");
-            if (inTextfil == null)
-            {
-                Console.WriteLine("Kompisboken är tom just nu");
-            }
-            else { }
-            while (true)
-            {
-                string line = inTextfil.ReadLine();
-                if (line == null) break;
-                string[] lines = line.Split('\t');
 
-                Kompis s = new Kompis();
-                s.namn = lines[0];
-                s.fodelsedatum = double.Parse(lines[1]);
-                s.telefonnummer = double.Parse(lines[2]);
-                s.farg = lines[3];
-
-                kompisregister = LäggTillKompisTillVektor(kompisregister, s);
-            }
-
-            /*StreamReader infil = new StreamReader("RegisterLista.txt");
+            StreamReader infil = new StreamReader("RegisterLista.txt");
             string rad;
             while ((rad = infil.ReadLine()) != null)
             {
                 Kompis ny = new Kompis();
                 string[] attribut = rad.Split('\t');
                 ny.namn = attribut[0];
-                ny.fodelsedatum = int.Parse(attribut[1]);
-                ny.telefonnummer = int.Parse(attribut[2]);
+                ny.fodelsedatum = double.Parse(attribut[1]);
+                ny.telefonnummer = double.Parse(attribut[2]);
                 ny.farg = attribut[3];
 
-                //LäggTillKompis();
-                /*infil.WriteLine("Namn: " + attribut[0]);
-                infil.WriteLine("Födelsedag: " + attribut[1]);
-                infil.WriteLine("Telefonnummer: " + attribut[2]);
-                infil.WriteLine("Färg: " + attribut[3] + "\n");
+                LäggTillKompisTillVektor(ny);
             }
-            infil.Close();*/
+            infil.Close();
         }
 
         /// <summary>
@@ -313,7 +288,7 @@ namespace Kompisbok
             for (int i = 0; i < kompisregister.Length; i++)
             {
                 Kompis k = kompisregister[i];
-                utfil.Write("{0}\t{1}\t{2}\t{3}\t", k.namn, k.fodelsedatum, k.telefonnummer, k.farg);
+                utfil.WriteLine("{0}\t{1}\t{2}\t{3}\t", k.namn, k.fodelsedatum, k.telefonnummer, k.farg);
             }
             utfil.Close();
         }
