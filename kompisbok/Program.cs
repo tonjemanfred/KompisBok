@@ -13,8 +13,7 @@ namespace Kompisbok
             Console.WriteLine("-----------------------------------");
             Console.WriteLine("\nHej kompis!!");
             Console.WriteLine("Vad vill du/ni hitta på?");
-            Meny1();
-            //ToDO SparaTillTextfil();
+            Meny();
         }
 
         /// <summary>
@@ -67,7 +66,7 @@ namespace Kompisbok
             //ToDO ifall användaren skriver in felaktigt menyval --> tillbaka till menyn
         }
 
-        public static void Meny1()
+        public static void Meny1() //denna metod används inte just nu
         {
             Console.WriteLine("\n-----------------------------------");
             Console.Write("1 - Visa kompislista");
@@ -154,7 +153,7 @@ namespace Kompisbok
         }
 
         /// <summary>
-        /// felhantering av inmatning vid int-typ
+        /// Felhantering av inmatning vid int-typ
         /// </summary>
         /// <returns></returns>
         public static double MataInInt() //ToDO byta namn på metoden till något i stil med FelhanteringDouble??
@@ -168,7 +167,7 @@ namespace Kompisbok
         }
 
         /// <summary>
-        /// metod för att utöka vektorn
+        /// Skapar en ny utökad vektorn
         /// </summary>
         /// <param name="vektor"></param>
         /// <param name="nytt"></param>
@@ -183,7 +182,7 @@ namespace Kompisbok
         }
 
         /// <summary>
-        /// denna metod ska vi använda sedan för ta bort objekt från vektorn
+        /// Ta bort kompisar(objekt) från vektorn
         /// </summary>
         /// <param name="vektor"></param>
         /// <returns></returns>
@@ -220,7 +219,7 @@ namespace Kompisbok
         }
 
         /// <summary>
-        /// metod som sorterar kompisregistret efter namn
+        /// Sorterar kompisregistret efter namn
         /// </summary>
         public static void SorteraEfterNamn()
         {
@@ -243,7 +242,7 @@ namespace Kompisbok
         }
 
         /// <summary>
-        /// metod som stöttar metoden SorteraEfterNamn och byter plats på två objekt i vektorn
+        /// Metod som stöttar metoden SorteraEfterNamn och byter plats på två objekt i vektorn
         /// </summary>
         /// <param name="vektor"></param>
         /// <param name="a"></param>
