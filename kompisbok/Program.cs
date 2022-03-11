@@ -5,7 +5,7 @@ namespace Kompisbok
 {
     class KompisBok
     {
-        static Kompis[] kompisregister = new Kompis[0]; //vi börjar vektorn med 0 platser. static=klassvariabel, det finns bara ETT kompisregister i programmet
+        static Kompis[] kompisregister = new Kompis[0]; 
 
         public static void Main(string[] args)
         {
@@ -20,9 +20,12 @@ namespace Kompisbok
 
         #region Meny
 
-        public static void Meny() //denna metod används inte just nu
+        /// <summary>
+        /// Huvudmenyn
+        /// </summary>
+        public static void Meny() 
         {
-            bool avsluta = false; //bytte till false
+            bool avsluta = false; 
             while (!avsluta)
             {
                 Console.WriteLine("\n-----------------------------------");
@@ -45,7 +48,7 @@ namespace Kompisbok
                         do
                         {
                             LäggTillKompis();
-                            Console.Write("\nVill du lägga till en kompis till?? (j/n): "); //byta till MataInInt funktionen ist så man får en säkrare frlhantering??
+                            Console.Write("\nVill du lägga till ytterligare en kompis?? (j/n): "); 
                         } while (Console.ReadLine().ToLower() != "n");
                         break;
                     case 3:
@@ -69,13 +72,13 @@ namespace Kompisbok
         #region Skriv ut register
 
         /// <summary>
-        /// metod där kompislistan kommer att skrivas ut i konsolen. menyval 1
+        /// Metod där kompislistan kommer att skrivas ut i konsolen. Menyval 1
         /// </summary>
         static void SkrivUtKompisRegister()
         {
             Console.WriteLine("\n\nHär är dina kompisar: ");
             Console.WriteLine("NAMN \t\t FÖDELSEDAG \t TELEFONNUMMER \t FAVVOFÄRG");
-            for (int i = 0; i < kompisregister.Length; i++) //i en loop kommer varje kompis att skrivas ut i konsolen kompis för kompis
+            for (int i = 0; i < kompisregister.Length; i++) 
             {
                 Console.WriteLine(kompisregister[i].namn + "\t\t" + kompisregister[i].fodelsedatum + "\t\t" + kompisregister[i].telefonnummer + "\t" + kompisregister[i].farg);
             }
@@ -86,22 +89,22 @@ namespace Kompisbok
         #region Lägg till kompis
 
         /// <summary>
-        /// metod för att lägga till en kompis i boken. menyval 2
+        /// Metod för att lägga till en kompis i boken. Menyval 2
         /// </summary>
         public static void LäggTillKompis()
         {
-            Kompis ny = new Kompis(); //skapa ett objekt, i temporära variabeln "ny"
+            Kompis ny = new Kompis(); 
             Console.WriteLine("\nKul med en ny kompis! Låt oss lägga till henne/honom!");
             Console.Write("\nNya kompisen namn: ");
             ny.namn = Console.ReadLine();
-            Console.Write("Nya kompisens födelsedag (skriv såhär: ååmmdd): "); //kan man lägga till en == av något slag som hantering av fel inmatning?
+            Console.Write("Nya kompisens födelsedag (skriv såhär: ååmmdd): "); 
             ny.fodelsedatum = FelhanteringDouble();
-            Console.Write("Nya kompisens telefonnummer (skriv såhär: 46712345678: "); //inkluderar riktnummer för att annars går vi miste om den första 0:an i utskriften. Här måste vi även använda oss utan double för att den ska kunna spara ett så stort tal. Vi ändrade felhanteringen MataInDouble() för att passa detta.
+            Console.Write("Nya kompisens telefonnummer (skriv såhär: 46712345678: "); //Här måste vi även använda oss utan double för att den ska kunna spara ett så stort tal.
             ny.telefonnummer = FelhanteringDouble();
             Console.Write("Nya kompisens favvofärg: ");
             ny.farg = Console.ReadLine();
 
-            LäggTillKompisTillVektor(ny); //anropar metoden för att utöka vektorn
+            LäggTillKompisTillVektor(ny); 
             SorteraEfterNamn();
         }
         #endregion
@@ -112,7 +115,7 @@ namespace Kompisbok
         /// Felhantering av inmatning vid int-typ
         /// </summary>
         /// <returns></returns>
-        public static double FelhanteringDouble() //ToDO byta namn på metoden till något i stil med FelhanteringDouble??
+        public static double FelhanteringDouble() 
         {
             double check;
             while (!double.TryParse(Console.ReadLine(), out check))//Medan inmatat inte är heltal skriv ut felmedelande och fråga igen.
