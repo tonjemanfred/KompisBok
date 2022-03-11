@@ -11,12 +11,14 @@ namespace Kompisbok
         {
             LaddaSparadTextFil();
             Console.WriteLine("-----------------------------------");
-            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\nHej kompis!!");
             Console.WriteLine("Vad vill du/ni hitta på?");
             Console.ForegroundColor = ConsoleColor.White;
-            Meny();
+            Meny1();
         }
+
+        #region Meny
 
         /// <summary>
         /// metod för programmets meny
@@ -30,7 +32,7 @@ namespace Kompisbok
             Console.Write("\n4 - Spara och stäng kompisboken\n");
             Console.WriteLine("-----------------------------------");
             Console.Write("\nVälj menyval genom att skriva in rätt siffra: ");
-            double menyval = MataInDouble();
+            double menyval = FelhanteringDouble();
             //ToDO if-meny eller switch-case??
 
             if (menyval == 1)
@@ -49,19 +51,13 @@ namespace Kompisbok
             }
             else if (menyval == 3)
             {
-                if (true)
-                {
-                    SokningViaNamn();
-                }
-                else
-                {
-                    Console.WriteLine("Vi hittade inte kompisen."); //ToDO Felmedelande om man inte hittar kompisen
-                }
+                SokningViaNamn();
                 Meny();
             }
             else if (menyval == 4)
             {
                 SparaTillTextfil();
+                Console.WriteLine($"Sparat: {DateTime.Now}");
                 Console.Write("\n\nHejdå kompis!! :D");
             }
             else
@@ -70,27 +66,29 @@ namespace Kompisbok
                 Meny();
             }
         }
+        #endregion
+
+        #region Meny1
 
         public static void Meny1() //denna metod används inte just nu
         {
-            Console.WriteLine("\n-----------------------------------");
-            Console.Write("1 - Visa kompislista");
-            Console.Write("\n2 - Lägg till kompis");
-            Console.Write("\n3 - Ta bort kompis"); 
-            Console.Write("\n4 - Spara och stäng kompisboken\n");
-            Console.WriteLine("-----------------------------------");
             bool avsluta = false; //bytte till false
             while (!avsluta)
             {
+                Console.WriteLine("\n-----------------------------------");
+                Console.Write("1 - Visa kompislista");
+                Console.Write("\n2 - Lägg till kompis");
+                Console.Write("\n3 - Ta bort kompis");
+                Console.Write("\n4 - Spara och stäng kompisboken\n");
+                Console.WriteLine("-----------------------------------");
                 Console.Write("\nVälj menyval genom att skriva in rätt siffra: ");
-                double menyval = MataInDouble();
+                double menyval = FelhanteringDouble();
 
                 switch (menyval)
                 {
                     case 1:
                         Console.WriteLine("Visa kompislista");
                         SkrivUtKompisRegister();
-                        Meny1();
                         break;
                     case 2:
                         Console.WriteLine("Lägg till kompis");
@@ -99,16 +97,15 @@ namespace Kompisbok
                             LäggTillKompis();
                             Console.Write("\nVill du lägga till en kompis till?? (j/n): "); //byta till MataInInt funktionen ist så man får en säkrare frlhantering??
                         } while (Console.ReadLine().ToLower() != "n");
-                        Meny1();
                         break;
                     case 3:
                         Console.WriteLine("Ta bort en kompis");
                         SokningViaNamn();
-                        Meny1();
                         break;
                     case 4:
                         SparaTillTextfil();
-                        Console.Write("\n\nHejdå kompis!! :D");
+                        Console.WriteLine("\n\nSparat: ", DateTime.Now);
+                        Console.Write("\nHejdå kompis!! :D");
                         avsluta = true;
                         break;
                     default:
@@ -117,7 +114,9 @@ namespace Kompisbok
                 }
             }
         }
-        //ToDO regioner
+        #endregion
+
+        #region Skriv ut register
 
         /// <summary>
         /// metod där kompislistan kommer att skrivas ut i konsolen. menyval 1
@@ -132,6 +131,10 @@ namespace Kompisbok
             }
         }
 
+        #endregion
+
+        #region Lägg till kompis
+
         /// <summary>
         /// metod för att lägga till en kompis i boken. menyval 2
         /// </summary>
@@ -142,21 +145,24 @@ namespace Kompisbok
             Console.Write("\nNya kompisen namn: ");
             ny.namn = Console.ReadLine();
             Console.Write("Nya kompisens födelsedag (skriv såhär: ååmmdd): "); //kan man lägga till en == av något slag som hantering av fel inmatning?
-            ny.fodelsedatum = MataInDouble();
+            ny.fodelsedatum = FelhanteringDouble();
             Console.Write("Nya kompisens telefonnummer (skriv såhär: 46712345678: "); //inkluderar riktnummer för att annars går vi miste om den första 0:an i utskriften. Här måste vi även använda oss utan double för att den ska kunna spara ett så stort tal. Vi ändrade felhanteringen MataInDouble() för att passa detta.
-            ny.telefonnummer = MataInDouble();
+            ny.telefonnummer = FelhanteringDouble();
             Console.Write("Nya kompisens favvofärg: ");
             ny.farg = Console.ReadLine();
 
             LäggTillKompisTillVektor(ny); //anropar metoden för att utöka vektorn
             SorteraEfterNamn();
         }
+        #endregion
+
+        #region Felhantering av Double
 
         /// <summary>
         /// Felhantering av inmatning vid int-typ
         /// </summary>
         /// <returns></returns>
-        public static double MataInDouble() //ToDO byta namn på metoden till något i stil med FelhanteringDouble??
+        public static double FelhanteringDouble() //ToDO byta namn på metoden till något i stil med FelhanteringDouble??
         {
             double check;
             while (!double.TryParse(Console.ReadLine(), out check))//Medan inmatat inte är heltal skriv ut felmedelande och fråga igen.
@@ -165,6 +171,9 @@ namespace Kompisbok
             }
             return check;
         }
+        #endregion
+
+        #region Ökning och minskning av vektor
 
         /// <summary>
         /// Ta bort kompisar(objekt) från vektorn
@@ -201,9 +210,10 @@ namespace Kompisbok
             nyKompisRegister[kompisregister.Length] = nyKompis;
             kompisregister = nyKompisRegister;
         }
+        #endregion
 
         #region Sortering
-        
+
         /// <summary>
         /// Sorterar kompisregistret efter namn
         /// </summary>
@@ -222,7 +232,7 @@ namespace Kompisbok
                 }
                 if (i < minst)
                 {
-                    Swap(kompisregister, minst, i);
+                    Swap(minst, i);
                 }
             }
         }
@@ -233,33 +243,42 @@ namespace Kompisbok
         /// <param name="vektor"></param>
         /// <param name="a"></param>
         /// <param name="b"></param>
-        public static void Swap(Kompis[] vektor, int a, int b)
+        public static void Swap(int a, int b)
         {
-            Kompis tilf = vektor[a]; //tilf=tillfällig
-            vektor[a] = vektor[b];
-            vektor[b] = tilf;
+            Kompis tilf = kompisregister[a]; //tilf=tillfällig
+            kompisregister[a] = kompisregister[b];
+            kompisregister[b] = tilf;
         }
         #endregion
+
+        #region Sökning
 
         /// <summary>
         /// Söker efter kompis och raderar sedan från vektorn
         /// </summary>
         public static void SokningViaNamn()
         {
-            Console.Write("Sök efter personen: ");
-            string sokning = Console.ReadLine().ToUpper();
+            Console.Write("\nSök efter personen: ");
+            string sokning = Console.ReadLine().ToLower();
+            bool kontroll = true;
             for (int i = 0; i < kompisregister.Length; i++)
             {
-                if (kompisregister[i].namn.ToUpper().CompareTo(sokning) == 0)
+                if (kompisregister[i].namn.ToLower().CompareTo(sokning) == 0)
                 {
-                    Console.WriteLine("Hittat personen!");
+                    Console.WriteLine($"\nVi hittade: {sokning}!");
                     TaBortElement(i);
-                    Console.WriteLine("Personen är nu borttagen från boken.\n\n");
+                    Console.WriteLine($"{sokning} är nu borttagen från boken.");
+                    kontroll = false;
                 }
             }
+            if (kontroll)
+            {
+                Console.WriteLine("\nPersonen som du söker efter finns inte i boken");
+            }
         }
+        #endregion
 
-        #region Stream
+        #region StreamReader och StreamWriter
         /// <summary>
         /// Läser in alla element från textfilen och sparar i vektorn kompisregister
         /// </summary>
