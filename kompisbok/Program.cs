@@ -15,62 +15,12 @@ namespace Kompisbok
             Console.WriteLine("\nHej kompis!!");
             Console.WriteLine("Vad vill du/ni hitta på?");
             Console.ForegroundColor = ConsoleColor.White;
-            Meny1();
+            Meny();
         }
 
         #region Meny
 
-        /// <summary>
-        /// metod för programmets meny
-        /// </summary>
-        public static void Meny()
-        {
-            Console.WriteLine("\n-----------------------------------");
-            Console.Write("1 - Visa kompislista");
-            Console.Write("\n2 - Lägg till kompis");
-            Console.Write("\n3 - Ta bort kompis"); 
-            Console.Write("\n4 - Spara och stäng kompisboken\n");
-            Console.WriteLine("-----------------------------------");
-            Console.Write("\nVälj menyval genom att skriva in rätt siffra: ");
-            double menyval = FelhanteringDouble();
-            //ToDO if-meny eller switch-case??
-
-            if (menyval == 1)
-            {
-                SkrivUtKompisRegister();
-                Meny();
-            }
-            else if (menyval == 2)
-            {
-                do
-                {
-                    LäggTillKompis();
-                    Console.Write("\nVill du lägga till en kompis till?? (j/n): ");
-                } while (Console.ReadLine().ToLower() != "n");
-                Meny();
-            }
-            else if (menyval == 3)
-            {
-                SokningViaNamn();
-                Meny();
-            }
-            else if (menyval == 4)
-            {
-                SparaTillTextfil();
-                Console.WriteLine($"Sparat: {DateTime.Now}");
-                Console.Write("\n\nHejdå kompis!! :D");
-            }
-            else
-            {
-                Console.Write("\nOjdå, du verkar ha skrivit in fel! Vi försöker igen :)");
-                Meny();
-            }
-        }
-        #endregion
-
-        #region Meny1
-
-        public static void Meny1() //denna metod används inte just nu
+        public static void Meny() //denna metod används inte just nu
         {
             bool avsluta = false; //bytte till false
             while (!avsluta)
