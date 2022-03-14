@@ -21,7 +21,7 @@ namespace Kompisbok
         #region Meny
 
         /// <summary>
-        /// Huvudmenyn
+        /// Huvudmenyn för Kompisboken
         /// </summary>
         public static void Meny() 
         {
@@ -49,7 +49,7 @@ namespace Kompisbok
                         {
                             LäggTillKompis();
                             Console.Write("\nVill du lägga till ytterligare en kompis?? (j/n): "); 
-                        } while (Console.ReadLine().ToLower() != "n");
+                        } while (Console.ReadLine().ToLower() != "n"); //Så länge användaren inte matar in "n" kommer kompisar läggas till i boken
                         break;
                     case 3:
                         Console.WriteLine("Ta bort en kompis");
@@ -91,7 +91,7 @@ namespace Kompisbok
         /// <summary>
         /// Metod för att lägga till en kompis i boken. Menyval 2
         /// </summary>
-        public static void LäggTillKompis()
+        public static void LäggTillKompis() //ToDO borde vi ändra detta till LaggTillKompis
         {
             Kompis ny = new Kompis(); 
             Console.WriteLine("\nKul med en ny kompis! Låt oss lägga till henne/honom!");
@@ -153,7 +153,7 @@ namespace Kompisbok
         /// <param name="gamlaKompisRegister"></param>
         /// <param name="nyKompis"></param>
         /// <returns></returns>
-        public static void LäggTillKompisTillVektor(Kompis nyKompis)
+        public static void LäggTillKompisTillVektor(Kompis nyKompis) //TodO LaggTillKompisTillVektor?
         {
             Kompis[] nyKompisRegister = new Kompis[kompisregister.Length + 1];
             for (int i = 0; i < kompisregister.Length; i++)
@@ -209,7 +209,7 @@ namespace Kompisbok
         /// <summary>
         /// Söker efter kompis och raderar sedan från vektorn
         /// </summary>
-        public static void SokningViaNamn()
+        public static void SokningViaNamn() //ToDO Sökning eller Sokning?
         {
             Console.Write("\nSök efter personen: ");
             string sokning = Console.ReadLine().ToLower();
