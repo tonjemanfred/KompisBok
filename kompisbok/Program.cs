@@ -5,7 +5,7 @@ namespace Kompisbok
 {
     class KompisBok
     {
-        static Kompis[] kompisregister = new Kompis[0]; 
+        static Kompis[] kompisregister = new Kompis[0];
 
         public static void Main(string[] args)
         {
@@ -23,9 +23,9 @@ namespace Kompisbok
         /// <summary>
         /// Huvudmenyn för Kompisboken
         /// </summary>
-        public static void Meny() 
+        public static void Meny()
         {
-            bool avsluta = false; 
+            bool avsluta = false;
             while (!avsluta)
             {
                 Console.WriteLine("\n-----------------------------------");
@@ -48,7 +48,7 @@ namespace Kompisbok
                         do
                         {
                             LäggTillKompis();
-                            Console.Write("\nVill du lägga till ytterligare en kompis?? (j/n): "); 
+                            Console.Write("\nVill du lägga till ytterligare en kompis?? (j/n): ");
                         } while (Console.ReadLine().ToLower() != "n"); //Så länge användaren inte matar in "n" kommer kompisar läggas till i boken
                         break;
                     case 3:
@@ -57,7 +57,7 @@ namespace Kompisbok
                         break;
                     case 4:
                         SparaTillTextfil();
-                        Console.WriteLine("\n\nSparat: ", DateTime.Now);
+                        Console.WriteLine($"\n\nSparat: {DateTime.Now}");
                         Console.Write("\nHejdå kompis!! :D");
                         avsluta = true;
                         break;
@@ -78,7 +78,7 @@ namespace Kompisbok
         {
             Console.WriteLine("\n\nHär är dina kompisar: ");
             Console.WriteLine("NAMN \t\t FÖDELSEDAG \t TELEFONNUMMER \t FAVVOFÄRG");
-            for (int i = 0; i < kompisregister.Length; i++) 
+            for (int i = 0; i < kompisregister.Length; i++)
             {
                 Console.WriteLine(kompisregister[i].namn + "\t\t" + kompisregister[i].fodelsedatum + "\t\t" + kompisregister[i].telefonnummer + "\t" + kompisregister[i].farg);
             }
@@ -93,18 +93,18 @@ namespace Kompisbok
         /// </summary>
         public static void LäggTillKompis() //ToDO borde vi ändra detta till LaggTillKompis
         {
-            Kompis ny = new Kompis(); 
+            Kompis ny = new Kompis();
             Console.WriteLine("\nKul med en ny kompis! Låt oss lägga till henne/honom!");
             Console.Write("\nNya kompisen namn: ");
             ny.namn = Console.ReadLine();
-            Console.Write("Nya kompisens födelsedag (skriv såhär: ååmmdd): "); 
+            Console.Write("Nya kompisens födelsedag (skriv såhär: ååmmdd): ");
             ny.fodelsedatum = FelhanteringDouble();
             Console.Write("Nya kompisens telefonnummer (skriv såhär: 46712345678: "); //Här måste vi även använda oss utan double för att den ska kunna spara ett så stort tal.
             ny.telefonnummer = FelhanteringDouble();
             Console.Write("Nya kompisens favvofärg: ");
             ny.farg = Console.ReadLine();
 
-            LäggTillKompisTillVektor(ny); 
+            LäggTillKompisTillVektor(ny);
             SorteraEfterNamn();
         }
         #endregion
@@ -115,7 +115,7 @@ namespace Kompisbok
         /// Felhantering av inmatning vid int-typ
         /// </summary>
         /// <returns></returns>
-        public static double FelhanteringDouble() 
+        public static double FelhanteringDouble()
         {
             double check;
             while (!double.TryParse(Console.ReadLine(), out check))//Medan inmatat inte är heltal skriv ut felmedelande och fråga igen.
@@ -158,7 +158,7 @@ namespace Kompisbok
             Kompis[] nyKompisRegister = new Kompis[kompisregister.Length + 1];
             for (int i = 0; i < kompisregister.Length; i++)
             {
-                nyKompisRegister[i] = kompisregister[i]; 
+                nyKompisRegister[i] = kompisregister[i];
             }
             nyKompisRegister[kompisregister.Length] = nyKompis;
             kompisregister = nyKompisRegister;
@@ -189,7 +189,7 @@ namespace Kompisbok
                 }
             }
         }
-        
+
         /// <summary>
         /// Metod som stöttar metoden SorteraEfterNamn och byter plats på två objekt i vektorn
         /// </summary>
@@ -236,7 +236,7 @@ namespace Kompisbok
         /// Läser in alla element från textfilen och sparar i vektorn kompisregister
         /// </summary>
         public static void LaddaSparadTextFil()
-         {
+        {
             StreamReader infil = new StreamReader("RegisterLista.txt");
             string rad;
             while ((rad = infil.ReadLine()) != null)
@@ -251,7 +251,7 @@ namespace Kompisbok
                 LäggTillKompisTillVektor(ny);
             }
             infil.Close();
-         }
+        }
 
         /// <summary>
         /// Skriver över vektorns innehåll in i en textfil
